@@ -21,7 +21,7 @@ function App() {
         />
       }
       {data && (
-        <p>{data}</p>
+        <p>{`Barcode Data: ${data}`}</p>
       )}
     </>
   );
