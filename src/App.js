@@ -1,25 +1,26 @@
-import React from "react";
-import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import Q from "q";
+import React, {useState} from "react";
+import BarcodeScanner from "./BarcodeScanner";
 
 function App() {
-  const [data, setData] = React.useState("Not Found");
-  const [torchOn, setTorchOn] = React.useState(false);
+  const [data, setData] = useState("");
+  const [isScannerOpen, setIsScannerOpen] = useState(false)
 
   return (
     <>
-      <BarcodeScannerComponent
-        width={500}
-        height={500}
-        torch={torchOn}
-        onUpdate={(err, result) => {
-          if (result) setData(result.text);
-          else setData("Not Found");
-        }}
-      />
+    {isScannerOpen ? 
+      <button onClick={() => setIsScannerOpen(false)}>{'Close Scanner'}</button> : 
+      <button onClick={() => setIsScannerOpen(true)}>{'Open Scanner'}</button>
+    }
+      {isScannerOpen && 
+        <BarcodeScanner 
+          onScan={(result) => {
+              setData(result);
+              isScannerOpen(false);
+          }}
+        />
+      }
       <p>{data}</p>
-      <button onClick={() => setTorchOn(!torchOn)}>
-        Switch Torch {torchOn ? "Off" : "On"}
-      </button>
     </>
   );
 }
