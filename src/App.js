@@ -4,7 +4,7 @@ import BarcodeScanner from "./BarcodeScanner";
 
 function App() {
   const [data, setData] = useState("");
-  const [isScannerOpen, setIsScannerOpen] = useState(false)
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
 
   return (
     <>
@@ -16,7 +16,7 @@ function App() {
         <BarcodeScanner 
           onScan={(result) => {
               setData(result.text);
-              isScannerOpen(false);
+              setIsScannerOpen(false);
           }}
         />
       }
