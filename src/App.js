@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+
+import BarcodeScannerComponent from 'react-qr-barcode-scanner';
 
 function App() {
+  const [scannedResult, setScannedResult] = useState(null);
+  const [scanningError, setScanningError] = useState(null);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>{'Scan some stuff'}</h2>
+      <BarcodeScannerComponent 
+        width={500}
+        height={500}
+        onUpdate={(data) => {
+          setScannedResult(data.text)
+          setScanningError(null);
+        }}
+        onError={(data) => {
+          setScanningError(data.text)
+          setScannedResult(null);
+        }}
+      />
+      {scannedResult && (<p>{`Scanned Result: ${scannedResult}`}</p>)}
+      {scannedResult && (<p>{`Error: ${scannedResult}`}</p>)}
     </div>
   );
 }
