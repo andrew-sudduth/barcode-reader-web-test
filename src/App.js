@@ -15,12 +15,14 @@ function App() {
       {isScannerOpen && 
         <BarcodeScanner 
           onScan={(result) => {
-              setData(result);
+              setData(result.text);
               isScannerOpen(false);
           }}
         />
       }
-      <p>{data}</p>
+      {data && (
+        <p>{data}</p>
+      )}
     </>
   );
 }
