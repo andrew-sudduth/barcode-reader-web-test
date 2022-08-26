@@ -1,9 +1,9 @@
-import Q from "q";
 import React, {useState} from "react";
 import BarcodeScanner from "./BarcodeScanner";
 
 function App() {
   const [data, setData] = useState("");
+  const [error, setError] = useState("");
   const [isScannerOpen, setIsScannerOpen] = useState(false);
 
   return (
@@ -18,10 +18,17 @@ function App() {
               setData(result.text);
               setIsScannerOpen(false);
           }}
+          onError={(error) => {
+            setError(error);
+            setIsScannerOpen(false);
+          }}
         />
       }
       {data && (
         <p>{`Barcode Data: ${data}`}</p>
+      )}
+      {error && (
+        <p>{`Error ${error}`}</p>
       )}
     </>
   );

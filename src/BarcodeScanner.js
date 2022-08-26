@@ -1,6 +1,6 @@
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
-const BarcodeScanner = ({onScan}) => (
+const BarcodeScanner = ({onScan, onError}) => (
     <>
       <BarcodeScannerComponent
         width={500}
@@ -10,6 +10,7 @@ const BarcodeScanner = ({onScan}) => (
                 onScan(result)
             }
         }}
+        onError={onError}
       />
     </>
 )

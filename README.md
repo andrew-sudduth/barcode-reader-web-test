@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# Barcode Reader POC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Spun up basic app using Create React App
+- Used package `react-qr-barcode-scanner`
+  - Leverages `react-webcam` for using user's webcam and `@zxing-js/library` to parse the barcode/QR code
 
-## Available Scripts
+## Outcome
+### Can we do what we want to do?
+- Yes, this allows us to scan a barcode and QR code from the browser.  It sounds like we we're leaning toward barcodes, and this seems to be the most used library for barcodes.  If we're choose to go the route of QR codes, `react-qr-reader` might be a better options
 
-In the project directory, you can run:
+### Gotchas:
+- Most webcam barcode/qr scanning libraries appear to use `@zxing-js/library`, which [appears to be dead](https://github.com/zxing-js/library#project-in-maintenance-mode-only).
+- Both `react-qr-barcode-scanner` and `react-qr-reader` seem largely unmaintained, which is less than ideal, which is a potential risk.
+  - With that said, it seems both of these packages are stuck in the past on React 16 (18 is the latest at time of writing), with not much mention of upgrading.  This forces consumers to use React 16, or specify `--legacy-peer-deps` when running `npm install`.
+- I had trouble with local development using both of these packages - the camera never appears to open.  I am not sure if this has something to do with browser security.  I was able to get this working by pushing the app to Vercel.  Things I've tried:
+  - Generating a local SSL cert (using mkcert)
+  - Messing with Browser settings.
 
-### `npm start`
+### TL;DR:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- It works, but the local development experience isn't the best.  Maybe someone smarter than me can figure out what I am doing wrong.
+- If we go with barcodes, we should use `react-qr-barcode-scanner`.  If we use QR codes, we should use `react-qr-reader`.
+- Support for web-based scanners isn't the best.  Mobile (React Native) seems to have plenty of options (including one by Expo).
