@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import BarcodeScanner from "./BarcodeScanner";
+import Html5QrcodePlugin from "./Html5QrcodePlugin";
 
 function App() {
   const [data, setData] = useState("");
@@ -13,16 +13,15 @@ function App() {
       <button onClick={() => setIsScannerOpen(true)}>{'Open Scanner'}</button>
     }
       {isScannerOpen && 
-        <BarcodeScanner 
-          onScan={(result) => {
-              setData(result.text);
-              setIsScannerOpen(false);
-          }}
-          onError={(error) => {
-            setError(error);
+        <Html5QrcodePlugin 
+          fps={10}
+          qrbox={250}
+          disableFlip={false}
+          qrCodeSuccessCallback={(decodedText, decodedResult) => {
+            setData(decodedText);
             setIsScannerOpen(false);
           }}
-        />
+          />
       }
       {data && (
         <p>{`Barcode Data: ${data}`}</p>
