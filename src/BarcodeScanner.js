@@ -1,4 +1,4 @@
-import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import BarcodeScannerComponent from "@steima/react-qr-barcode-scanner";
 
 const BarcodeScanner = ({onScan, onError}) => (
     <>
