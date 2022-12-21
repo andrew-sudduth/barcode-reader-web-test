@@ -15,7 +15,7 @@ function App() {
       {isScannerOpen && 
         <Html5QrcodePlugin 
           fps={10}
-          qrbox={250}
+          qrbox={500}
           disableFlip={false}
           qrCodeSuccessCallback={(decodedText, decodedResult) => {
             setData(decodedText);
